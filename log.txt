@@ -383,3 +383,23 @@ branch=main
 repo_root=D:\orchestrate_oct
 worktree=main
 parent_agent=none
+
+
+## [2026-10-25T13:51:30+05:30] Clarify Submission Evaluation Timeline and Scoring Process
+
+User Prompt (verbatim, secrets redacted):
+is the results are instant or it takes time
+
+Agent Response Summary:
+Explained the multi-stage evaluation lifecycle on the HackerRank Orchestrate platform. Clarified that output.csv and log.txt are evaluated almost immediately within 1-3 minutes, while sandbox execution of code.zip takes 3-10 minutes. Detailed that the AI Judge Interview is an interactive step initiated post-submission requiring candidate responses, and confirmed that the final composite score updates on the leaderboard once the interview and sandbox evaluation conclude.
+
+Actions:
+* Appended per-turn log entry adhering to AGENTS.md Section 5.2
+
+Context:
+tool=Antigravity
+model=Gemini 3.8 Flash (High)
+branch=main
+repo_root=D:\orchestrate_oct
+worktree=main
+parent_agent=none
