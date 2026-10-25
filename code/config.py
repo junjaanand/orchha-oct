@@ -1,0 +1,78 @@
+"""
+Configuration and constants for Ghost Data Still Exists deletion audit agent.
+"""
+
+import os
+from pathlib import Path
+
+# Paths
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DATASET_DIR = REPO_ROOT / "dataset"
+EVIDENCE_DIR = DATASET_DIR / "evidence"
+
+DELETION_REQUESTS_CSV = DATASET_DIR / "deletion_requests.csv"
+SAMPLE_REQUESTS_CSV = DATASET_DIR / "sample_deletion_requests.csv"
+SAMPLE_OUTPUT_CSV = DATASET_DIR / "sample_output.csv"
+USER_IDENTITIES_CSV = DATASET_DIR / "user_identities.csv"
+USER_AUDIT_LOG_CSV = DATASET_DIR / "user_audit_log.csv"
+SYSTEM_ACTIVITY_CSV = DATASET_DIR / "system_activity.csv"
+DELETION_RULES_CSV = DATASET_DIR / "deletion_rules.csv"
+EVIDENCE_FILES_CSV = DATASET_DIR / "evidence_files.csv"
+
+OUTPUT_CSV = REPO_ROOT / "output.csv"
+AGENT_TRACE_JSON = REPO_ROOT / "agent_trace.json"
+
+TESSERACT_CMD = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+# Status values
+STATUS_COMPLETE = "COMPLETE"
+STATUS_INCOMPLETE = "INCOMPLETE"
+STATUS_NOT_APPLICABLE = "NOT_APPLICABLE"
+
+# Phase ordering (0: FINDING, 1: REMEDIATION, 2: VERIFICATION)
+PHASE_ORDER = {
+    "FINDING": 0,
+    "REMEDIATION": 1,
+    "VERIFICATION": 2,
+}
+
+# Operation ordering within phase
+OPERATION_ORDER = {
+    # FINDING
+    "REPORT_REMAINING_RECORD": 0,
+    "REPORT_EXPOSED_PII": 1,
+    "REPORT_ACTIVE_DATA_FLOW": 2,
+    "REPORT_RESTORE_RISK": 3,
+    # REMEDIATION
+    "DISABLE_DATA_FLOW": 0,
+    "BLOCK_RESTORE": 1,
+    "DELETE_RECORD": 2,
+    "REDACT_RECORD": 3,
+    "ANONYMIZE_RECORD": 4,
+    # VERIFICATION
+    "VERIFY_RECORD_ABSENT": 0,
+    "VERIFY_RECORD_PRESENT": 1,
+    "VERIFY_RECORD_REDACTED": 2,
+    "VERIFY_RECORD_ANONYMIZED": 3,
+    "VERIFY_DATA_FLOW_DISABLED": 4,
+    "VERIFY_RESTORE_BLOCKED": 5,
+}
+
+# Map operation to default expected state
+OPERATION_TO_STATE = {
+    "REPORT_REMAINING_RECORD": "PRESENT",
+    "REPORT_EXPOSED_PII": "PRESENT",
+    "REPORT_ACTIVE_DATA_FLOW": "ACTIVE",
+    "REPORT_RESTORE_RISK": "ACTIVE",
+    "DISABLE_DATA_FLOW": "DISABLED",
+    "BLOCK_RESTORE": "BLOCKED",
+    "DELETE_RECORD": "ABSENT",
+    "REDACT_RECORD": "REDACTED",
+    "ANONYMIZE_RECORD": "ANONYMIZED",
+    "VERIFY_RECORD_ABSENT": "ABSENT",
+    "VERIFY_RECORD_PRESENT": "PRESENT",
+    "VERIFY_RECORD_REDACTED": "REDACTED",
+    "VERIFY_RECORD_ANONYMIZED": "ANONYMIZED",
+    "VERIFY_DATA_FLOW_DISABLED": "DISABLED",
+    "VERIFY_RESTORE_BLOCKED": "BLOCKED",
+}
